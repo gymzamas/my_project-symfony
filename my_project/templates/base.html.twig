@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Garage{% endblock %}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        /* Reset some default styles */
+        body, h1, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff; /* Blanc */
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #000000; /* Noir */
+            color: #FFD700; /* Jaune doré */
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header h1 {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #FFD700; /* Jaune doré */
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 10px 0;
+            background-color: #008000; /* Vert */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #FFD700; /* Jaune doré */
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #FF0000; /* Rouge */
+            color: #FFFFFF; /* Blanc */
+        }
+
+        nav ul li a.active {
+            background-color: #FFD700; /* Jaune doré */
+            color: #000000; /* Noir */
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background-color: #000000; /* Noir */
+            color: #FFD700; /* Jaune doré */
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LYNX Garage Automobile</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ path('client_index') }}" class="active">Clients</a></li>
+                <li><a href="{{ path('vehicule_index') }}">Véhicules</a></li>
+                <li><a href="{{ path('mecanicien_index') }}">Mécaniciens</a></li>
+                <li><a href="{{ path('reparation_index') }}">Réparations</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block body %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Garage Automobile. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

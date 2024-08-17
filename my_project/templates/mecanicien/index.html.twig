@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Mécaniciens{% endblock %}
+
+{% block body %}
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #2c3e50;
+        }
+
+        h2 {
+            text-align: center;
+            color: #FF0000; /* Rouge */
+            margin-bottom: 20px;
+        }
+
+        .mecanicien-table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #ffffff; /* Blanc */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .mecanicien-table thead {
+            background-color: #000000; /* Noir */
+            color: #FFD700; /* Jaune doré */
+        }
+
+        .mecanicien-table th, .mecanicien-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .mecanicien-table th {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .mecanicien-table tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .mecanicien-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .mecanicien-table tbody tr:hover {
+            background-color: #FF0000; /* Rouge */
+            color: #FFFFFF; /* Blanc */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .mecanicien-table {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .mecanicien-table th, .mecanicien-table td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mecanicien-table thead {
+                display: none;
+            }
+
+            .mecanicien-table tr {
+                display: block;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .mecanicien-table td {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            .mecanicien-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+    </style>
+
+    <h2>Liste des Mécaniciens</h2>
+    <table class="mecanicien-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Spécialisation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mecanicien in mecaniciens %}
+                <tr>
+                    <td data-label="ID">{{ mecanicien.id }}</td>
+                    <td data-label="Nom">{{ mecanicien.nom }}</td>
+                    <td data-label="Spécialisation">{{ mecanicien.specialisation }}</td>
+                </tr>
+            {% else %}
+                <!-- Example Mechanicians -->
+                <tr>
+                    <td data-label="ID">1</td>
+                    <td data-label="Nom">Jean Dupont</td>
+                    <td data-label="Spécialisation">Moteurs</td>
+                </tr>
+                <tr>
+                    <td data-label="ID">2</td>
+                    <td data-label="Nom">Marie Curie</td>
+                    <td data-label="Spécialisation">Électronique</td>
+                </tr>
+                <tr>
+                    <td data-label="ID">3</td>
+                    <td data-label="Nom">Alain Prost</td>
+                    <td data-label="Spécialisation">Transmission</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

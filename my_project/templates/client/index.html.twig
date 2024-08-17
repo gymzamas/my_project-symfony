@@ -1,0 +1,219 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Garage LYNX AUTORACING{% endblock %}
+
+{% block body %}
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background-color: #000000; /* Noir */
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFD700; /* Jaune doré */
+        }
+
+        .navbar .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .menu a {
+            color: #FFD700; /* Jaune doré */
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .menu a:hover {
+            color: #FF0000; /* Rouge */
+        }
+
+        .navbar .menu a.active {
+            color: #FF0000; /* Rouge */
+            font-weight: bold;
+        }
+
+        /* Table Styles */
+        .client-list {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .client-list thead {
+            background-color: #000000; /* Noir */
+            color: #FFD700; /* Jaune doré */
+        }
+
+        .client-list th, .client-list td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .client-list th {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .client-list tr {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .client-list tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .client-list tr:hover {
+            background-color: #FF0000; /* Rouge */
+            color: #FFFFFF; /* Blanc */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar .menu {
+                flex-direction: column;
+                background-color: #000000; /* Noir */
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                display: none;
+            }
+
+            .navbar .menu.show {
+                display: flex;
+            }
+
+            .navbar .menu a {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .client-list {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .client-list th, .client-list td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .client-list thead {
+                display: none;
+            }
+
+            .client-list tr {
+                display: block;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .client-list td {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            .client-list td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+    </style>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">LYNX AUTORACING</div>
+        <div class="menu">
+            <a href="#" class="active">Home</a>
+            <a href="#">Clients</a>
+            <a href="#">Véhicules</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Tableau Clients -->
+    <h2 style="text-align:center; color: #FF0000; margin-bottom: 20px;">Liste des Clients de 2024 LYNX AUTORACING</h2>
+    <table class="client-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Téléphone</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="ID">1</td>
+                <td data-label="Nom">Jean Dupont</td>
+                <td data-label="Prénom">Jean</td>
+                <td data-label="Téléphone">+33 6 12 34 56 78</td>
+                <td data-label="Email">jean.dupont@example.com</td>
+            </tr>
+            <tr>
+                <td data-label="ID">2</td>
+                <td data-label="Nom">Marie Curie</td>
+                <td data-label="Prénom">Marie</td>
+                <td data-label="Téléphone">+33 6 98 76 54 32</td>
+                <td data-label="Email">marie.curie@example.com</td>
+            </tr>
+            <tr>
+                <td data-label="ID">3</td>
+                <td data-label="Nom">Alain Prost</td>
+                <td data-label="Prénom">Alain</td>
+                <td data-label="Téléphone">+33 6 11 22 33 44</td>
+                <td data-label="Email">alain.prost@example.com</td>
+            </tr>
+            {% for client in clients %}
+                <tr>
+                    <td data-label="ID">{{ client.id }}</td>
+                    <td data-label="Nom">{{ client.nom }}</td>
+                    <td data-label="Prénom">{{ client.prenom }}</td>
+                    <td data-label="Téléphone">{{ client.telephone }}</td>
+                    <td data-label="Email">{{ client.email }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Toggle Menu Script -->
+    <script>
+        document.querySelector('.navbar .logo').addEventListener('click', function() {
+            document.querySelector('.navbar .menu').classList.toggle('show');
+        });
+    </script>
+{% endblock %}

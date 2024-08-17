@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Véhicules{% endblock %}
+
+{% block body %}
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #2c3e50;
+        }
+
+        h2 {
+            text-align: center;
+            color: #FF0000; /* Rouge */
+            margin-bottom: 20px;
+        }
+
+        .vehicule-table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .vehicule-table thead {
+            background-color: #000000; /* Noir */
+            color: #FFD700; /* Jaune */
+        }
+
+        .vehicule-table th, .vehicule-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .vehicule-table th {
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+        }
+
+        .vehicule-table tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background-color 0.3s ease;
+        }
+
+        .vehicule-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .vehicule-table tbody tr:hover {
+            background-color: #008000; /* Vert */
+            color: #FFFFFF; /* Blanc */
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .vehicule-table {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .vehicule-table th, .vehicule-table td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vehicule-table thead {
+                display: none;
+            }
+
+            .vehicule-table tr {
+                display: block;
+                margin-bottom: 15px;
+                border-bottom: 2px solid #ddd;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .vehicule-table td {
+                display: block;
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+            }
+
+            .vehicule-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 10px;
+                width: 45%;
+                padding-right: 10px;
+                text-align: left;
+                font-weight: bold;
+            }
+        }
+    </style>
+
+    <h2>Liste des Véhicules</h2>
+    <table class="vehicule-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Marque</th>
+                <th>Modèle</th>
+                <th>Immatriculation</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicule in vehicules %}
+                <tr>
+                    <td data-label="ID">{{ vehicule.id }}</td>
+                    <td data-label="Marque">{{ vehicule.marque }}</td>
+                    <td data-label="Modèle">{{ vehicule.modele }}</td>
+                    <td data-label="Immatriculation">{{ vehicule.immatriculation }}</td>
+                </tr>
+            {% else %}
+                <!-- Example Vehicles -->
+                <tr>
+                    <td data-label="ID">1</td>
+                    <td data-label="Marque">Toyota</td>
+                    <td data-label="Modèle">Corolla</td>
+                    <td data-label="Immatriculation">ABC-1234</td>
+                </tr>
+                <tr>
+                    <td data-label="ID">2</td>
+                    <td data-label="Marque">Ford</td>
+                    <td data-label="Modèle">Mustang</td>
+                    <td data-label="Immatriculation">XYZ-5678</td>
+                </tr>
+                <tr>
+                    <td data-label="ID">3</td>
+                    <td data-label="Marque">Honda</td>
+                    <td data-label="Modèle">Civic</td>
+                    <td data-label="Immatriculation">LMN-9012</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
